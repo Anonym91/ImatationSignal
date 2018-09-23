@@ -4,13 +4,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
-public class SpoutStartUp implements ApplicationListener<ContextRefreshedEvent> {
+public class PostStartUp implements ApplicationListener<ContextRefreshedEvent> {
 
     public void onApplicationEvent(ContextRefreshedEvent event) {
         ApplicationContext ac = event.getApplicationContext();
-        SignalSpout signalSpout = ac.getBean(SignalSpout.class);
-        Thread thread2 = new Thread(signalSpout);
-        thread2.start();
+        PostSignal postSignal = ac.getBean(PostSignal.class);
+        Thread thread = new Thread(postSignal);
+        thread.start();
     }
-
 }

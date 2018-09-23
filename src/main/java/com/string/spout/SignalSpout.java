@@ -4,10 +4,13 @@ import com.string.generator.StringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 @Component
-public class SignalSpout implements Runnable {
+public class SignalSpout implements Runnable{
 
     @Autowired
     private StringGenerator stringGenerator;
@@ -22,15 +25,15 @@ public class SignalSpout implements Runnable {
 
         try {
 
-            fileWriter=new FileWriter(file);
+            fileWriter = new FileWriter(file);
 
-            BufferedWriter bw=new BufferedWriter(fileWriter);
+            BufferedWriter bw = new BufferedWriter(fileWriter);
 
             for (int i = 0; i < times; i++) {
 
-                String signal=stringGenerator.stringGenerator();
+                String signal = stringGenerator.stringGenerator();
 
-                fileWriter.write(signal+"\r\n");
+                fileWriter.write(signal + "\r\n");
 
             }
 
@@ -55,13 +58,13 @@ public class SignalSpout implements Runnable {
     }
 
 
-    public void run(){
+    public void run() {
 
-        try{
+        try {
 
             signalSpout(10000);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
